@@ -1,8 +1,7 @@
 import 'package:html/parser.dart' show parse;
 
-class FoodService{
-  List<String> parseData(){
-    var document = parse("""<div class="food">
+class FoodService {
+  String hallaFoodData = """<div class="food">
     <table summary="월요일 조식, 중식, 석식 음식내용"><caption>월요일 식단표 </caption><colgroup>
 			<col width="60">
 			<col width="85">
@@ -168,41 +167,28 @@ class FoodService{
 				</td></tr>
 </tbody>
 </table>
-    </div>""");
+    </div>""";
+  List<String> parseData() {
+    var document = parse(hallaFoodData);
     List<String> data = [];
     //data.add(document.getElementsByClassName("food")[0].innerHtml);
     //declaring variable for temp since we will be using it multiple places
-    var temp1  = document.getElementsByClassName("al10")[0].text as List;
-    var temp  = document.getElementsByClassName("al10")[1].text;
-    var temp2  = document.getElementsByClassName("al10")[3].text;
+    ///조식 0 정식 1 즉석 2 석식 3 다음날 조식 4
+    var morning = document.getElementsByClassName("al10")[0].text.replaceAll("-", "");
+    var morning1 = document.getElementsByClassName("al10")[4].text;
+    var morning2 = document.getElementsByClassName("al10")[8].text;
+    var morning3 = document.getElementsByClassName("al10")[12].text;
+    var morning4 = document.getElementsByClassName("al10")[16].text;
+
     ///화요일 조식은 순두부 참치떡 찌개
     var temp3 = document.getElementsByClassName("al10")[4].text;
+
     ///정식은 카레라이스
     var temp4 = document.getElementsByClassName("al10")[5].text;
+
     ///즉석은 치즈불닭
     var rows = document.getElementsByTagName("table")[0].getElementsByTagName("td");
-    data.addAll([temp1,temp2]);
-    //Map elememt to its innerHtml,  because we gonna need it.
-    //Iterate over all the table-data and store it in the data list
-    // rows.map((e) => e.innerHtml).forEach((element) {
-    //   if(element != "-"){
-    //     data.add(element);
-    //   }
-    // });
-
-    //print the data to console.
-    // print(rows);
-    ///0번 부터 쇠고기 두부 탕국 (조식)
-    ///정식 1번 참치 생 야채 비빔밥
-    /// 2번 즉석
-    /// 3번 저녁
-    ///
-    print(temp);
-    print(temp1);
-    print(temp2);
-    print("화요일 메뉴${temp3}");
-    print("화요일 정식 메뉴${temp4}");
-    // print(data);
-        return data;
+    data.addAll([morning, morning1, morning2, morning3, morning4]);
+    return data;
   }
 }
