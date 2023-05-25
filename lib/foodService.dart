@@ -168,7 +168,7 @@ class FoodService {
 </tbody>
 </table>
     </div>""";
-  List<String> parseData() {
+  List<String> parseMorningData() {
     var document = parse(hallaFoodData);
     List<String> data = [];
     //data.add(document.getElementsByClassName("food")[0].innerHtml);
@@ -189,6 +189,23 @@ class FoodService {
     ///즉석은 치즈불닭
     var rows = document.getElementsByTagName("table")[0].getElementsByTagName("td");
     data.addAll([morning, morning1, morning2, morning3, morning4]);
+    return data;
+  }
+  List<String>parseLunchData(){
+    var document = parse(hallaFoodData);
+    List<String> data = [];
+    //data.add(document.getElementsByClassName("food")[0].innerHtml);
+    //declaring variable for temp since we will be using it multiple places
+    ///조식 0 정식 1 즉석 2 석식 3 다음날 조식 4
+    var lunch = document.getElementsByClassName("al10")[1].text.replaceAll("-", "");
+    var lunch1 = document.getElementsByClassName("al10")[5].text;
+    var lunch2 = document.getElementsByClassName("al10")[9].text;
+    var lunch3 = document.getElementsByClassName("al10")[13].text;
+    var lunch4 = document.getElementsByClassName("al10")[17].text;
+
+    data.addAll([lunch,lunch1,lunch2,lunch3,lunch4,]);
+
+
     return data;
   }
 }
