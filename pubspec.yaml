@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_html: ^2.2.1
   appinio_swiper: ^2.0.0 #카드 슬라이더
-
+  flutter_screenutil: #scrren size
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -76,10 +76,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: score
+       fonts:
+         - asset: font/SCDream5.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

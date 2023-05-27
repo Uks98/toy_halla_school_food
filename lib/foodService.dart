@@ -168,17 +168,23 @@ class FoodService {
 </tbody>
 </table>
     </div>""";
+
   List<String> parseMorningData() {
     var document = parse(hallaFoodData);
     List<String> data = [];
     //data.add(document.getElementsByClassName("food")[0].innerHtml);
     //declaring variable for temp since we will be using it multiple places
     ///조식 0 정식 1 즉석 2 석식 3 다음날 조식 4
-    var morning = document.getElementsByClassName("al10")[0].text.replaceAll("-", "");
-    var morning1 = document.getElementsByClassName("al10")[4].text;
-    var morning2 = document.getElementsByClassName("al10")[8].text;
-    var morning3 = document.getElementsByClassName("al10")[12].text;
-    var morning4 = document.getElementsByClassName("al10")[16].text;
+    var morning =
+        document.getElementsByClassName("al10")[0].text.replaceAll("-", "");
+    var morning1 =
+        document.getElementsByClassName("al10")[4].text.replaceAll("-", "");
+    var morning2 =
+        document.getElementsByClassName("al10")[8].text.replaceAll("-", "");
+    var morning3 =
+        document.getElementsByClassName("al10")[12].text.replaceAll("-", "");
+    var morning4 =
+        document.getElementsByClassName("al10")[16].text.replaceAll("-", "");
 
     ///화요일 조식은 순두부 참치떡 찌개
     var temp3 = document.getElementsByClassName("al10")[4].text;
@@ -187,25 +193,64 @@ class FoodService {
     var temp4 = document.getElementsByClassName("al10")[5].text;
 
     ///즉석은 치즈불닭
-    var rows = document.getElementsByTagName("table")[0].getElementsByTagName("td");
+    var rows =
+        document.getElementsByTagName("table")[0].getElementsByTagName("td");
     data.addAll([morning, morning1, morning2, morning3, morning4]);
     return data;
   }
-  List<String>parseLunchData(){
+
+  List<String> parseLunchData() {
     var document = parse(hallaFoodData);
     List<String> data = [];
     //data.add(document.getElementsByClassName("food")[0].innerHtml);
     //declaring variable for temp since we will be using it multiple places
     ///조식 0 정식 1 즉석 2 석식 3 다음날 조식 4
-    var lunch = document.getElementsByClassName("al10")[1].text.replaceAll("-", "");
-    var lunch1 = document.getElementsByClassName("al10")[5].text;
-    var lunch2 = document.getElementsByClassName("al10")[9].text;
-    var lunch3 = document.getElementsByClassName("al10")[13].text;
-    var lunch4 = document.getElementsByClassName("al10")[17].text;
+    var lunch =
+        document.getElementsByClassName("al10")[1].text.replaceAll("-", "");
+    var lunch1 =
+        document.getElementsByClassName("al10")[5].text.replaceAll("-", "");
+    var lunch2 =
+        document.getElementsByClassName("al10")[9].text.replaceAll("-", "");
+    var lunch3 =
+        document.getElementsByClassName("al10")[13].text.replaceAll("-", "");
+    var lunch4 =
+        document.getElementsByClassName("al10")[17].text.replaceAll("-", "");
 
-    data.addAll([lunch,lunch1,lunch2,lunch3,lunch4,]);
+    data.addAll([
+      lunch,
+      lunch1,
+      lunch2,
+      lunch3,
+      lunch4,
+    ]);
 
+    return data;
+  }
 
+  List<String> parseFastLunchData() {
+    var document = parse(hallaFoodData);
+    List<String> data = [];
+    //data.add(document.getElementsByClassName("food")[0].innerHtml);
+    //declaring variable for temp since we will be using it multiple places
+    ///즉석 2 6 10 14 18
+    var fastLunch =
+    document.getElementsByClassName("al10")[2].text.replaceAll("-", "");
+    var fastLunch1 =
+    document.getElementsByClassName("al10")[6].text.replaceAll("-", "");
+    var fastLunch2 =
+    document.getElementsByClassName("al10")[10].text.replaceAll("-", "");
+    var fastLunch3 =
+    document.getElementsByClassName("al10")[14].text.replaceAll("-", "");
+    var fastLunch4 =
+    document.getElementsByClassName("al10")[18].text.replaceAll("-", "");
+
+    data.addAll([
+      fastLunch,
+      fastLunch1,
+      fastLunch2,
+      fastLunch3,
+      fastLunch4,
+    ]);
     return data;
   }
 }
