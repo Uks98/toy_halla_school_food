@@ -1,6 +1,7 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:halla_food/card_page.dart';
 import 'package:halla_food/foodService.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,7 +16,8 @@ class _MainPageState extends State<MainPage> {
   List<String> morningFoodList = [];
   List<String> lunchFoodList = [];
   List<String> fastLunchFoodList = [];
-
+  //내가 좋아하는 음식 리스트 ..
+  List<String> targetList = ["돈가스","냉면","오징어가스"];
   List<String> morningFoodInfo = [
     "월요일 조식",
     "화요일 조식",
@@ -47,12 +49,11 @@ class _MainPageState extends State<MainPage> {
   void addLunchList() async {
     lunchFoodList = await _foodService.parseLunchData();
   }
+
   void addFastLunchList() async {
     fastLunchFoodList = await _foodService.parseFastLunchData();
     print("food list ${fastLunchFoodList}");
-
   }
-
 
   @override
   void initState() {
@@ -86,14 +87,19 @@ class _MainPageState extends State<MainPage> {
             SizedBox(
               width: _screenUtil.setWidth(400),
               height: _screenUtil.setHeight(500),
-              child: morningFoodList.isEmpty ? Center(child: CircularProgressIndicator(),):AppinioSwiper(
+              child: morningFoodList.isEmpty
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : AppinioSwiper(
                 loop: true,
                 cardsCount: morningFoodList.length,
                 cardsBuilder: (BuildContext context, int index) {
-                  return swipeCardWidget(
-                      into: morningFoodInfo[index],
-                      menu: morningFoodList[index],
-                      cardColor: Color(0xffF2E3DB)
+                  return TextHighlightWidget(
+                    textList: morningFoodList,
+                    dayList: morningFoodInfo,
+                    targetWords: targetList,
+                    cardColor: Color(0xffFA9884),
                   );
                 },
               ),
@@ -102,12 +108,20 @@ class _MainPageState extends State<MainPage> {
             SizedBox(
               width: _screenUtil.setWidth(400),
               height: _screenUtil.setHeight(500),
-              child: lunchFoodList.isEmpty ? Center(child: CircularProgressIndicator(),):AppinioSwiper(
+              child: lunchFoodInfo.isEmpty
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : AppinioSwiper(
                 loop: true,
                 cardsCount: lunchFoodList.length,
                 cardsBuilder: (BuildContext context, int index) {
-                  return swipeCardWidget(
-                      into: lunchFoodInfo[index], menu: lunchFoodList[index],cardColor: Color(0xffEFFE5CA));
+                  return TextHighlightWidget(
+                    textList: lunchFoodList,
+                    dayList: lunchFoodInfo,
+                    targetWords: targetList,
+                    cardColor: Color(0xffF9E2AF),
+                  );
                 },
               ),
             ),
@@ -115,72 +129,47 @@ class _MainPageState extends State<MainPage> {
             SizedBox(
               width: _screenUtil.setWidth(400),
               height: _screenUtil.setHeight(500),
-              child: fastLunchFoodList.isEmpty ? Center(child: CircularProgressIndicator(),):AppinioSwiper(
+              child: fastLunchFoodList.isEmpty
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : AppinioSwiper(
                 loop: true,
                 cardsCount: fastLunchFoodList.length,
                 cardsBuilder: (BuildContext context, int index) {
-                  return swipeCardWidget(
-                      into: fastLunchFoodInfo[index], menu: fastLunchFoodList[index],cardColor: Color(0xffF3DEBA));
+                  return TextHighlightWidget(
+                    textList: fastLunchFoodList,
+                    dayList: fastLunchFoodInfo,
+                    targetWords: targetList,
+                    cardColor: Color(0xffF9E2AF),
+                  );
+                },
+              ),
+            ),
+            //져녁 식단 카드
+            SizedBox(
+              width: _screenUtil.setWidth(400),
+              height: _screenUtil.setHeight(500),
+              child: lunchFoodList.isEmpty
+                  ? Center(
+                child: CircularProgressIndicator(),
+              )
+                  : AppinioSwiper(
+                loop: true,
+                cardsCount: lunchFoodList.length,
+                cardsBuilder: (BuildContext context, int index) {
+                  return TextHighlightWidget(
+                    textList: lunchFoodList,
+                    dayList: lunchFoodInfo,
+                    targetWords: targetList,
+                    cardColor: Color(0xffE3CCAE),
+                  );
                 },
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget swipeCardWidget({required String into, required String menu,required Color cardColor}) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12).w,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                spreadRadius: 2.w,
-                blurRadius: 4.w,
-                offset: Offset(0, 1),
-              ),
-            ],
-          ),
-          width: 300.r,
-          height: 400.r,
-          child: Column(
-            children: [
-              Container(
-                child: Text(
-                  menu,
-                  style: TextStyle(fontSize: 20.sp),
-                ),
-                padding: const EdgeInsets.all(12),
-                width: _screenUtil.setWidth(300),
-                height: _screenUtil.setHeight(300),
-                alignment: Alignment.center,
-              ),
-              Expanded(
-                child: Container(
-                  width: 300.w, //이렇게 표현도 가능
-                  decoration: BoxDecoration(
-                    color: cardColor,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    into,
-                    style: TextStyle(fontSize: 18.sp, color: Colors.grey[8000],),
-                  ),
-                  padding: const EdgeInsets.all(12).r,
-                ),
-              )
-            ],
-          ),
-        )
-      ],
     );
   }
 }

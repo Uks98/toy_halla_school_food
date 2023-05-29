@@ -9,10 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
  import 'package:html/parser.dart' show parse;
 import 'package:halla_food/main.dart';
 
-void main() {
-  List<List<String>> data = [];
-
-  data.addAll([["aaaa"]]);
-
-  print(data);
-}
+// void main() {
+//   List<List<String>> data = [];
+//   final list = nameAndAge({'name' : "민지",'age' : 20});
+// }
+//
+// (String,int)nameAndAge(Map<String,dynamic> json){
+//   return (json["name"],json["age"]);
+// }
